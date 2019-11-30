@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>select2</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<style>
+	    *{
+	    	margin:0;
+	    	padding: 0;
+	    }
+	    body{
+	    	background: #5D6D7E;
+	    }
+		.container{
+			width: 80%;
+			height: 700px;
+			background: #F8F8F8;
+			margin:auto;
+			position: relative;
+		}
+
+		.form{
+			
+			height: 500px;
+			width: 60%;
+			top:50px;
+			left: 20%;
+			margin:auto;
+			position: absolute;
+		}
+
+		.input-design{
+			width: 60%;
+			height: 25px;
+			border-top: 0px solid green;
+			border-right: 0px solid green;
+			border-left: 0px solid green;
+			border-bottom: 2px solid #5D6D7E;
+			background: #F8F8F8;
+			padding: 4px 20px 0px 4px;
+			position: absolute;
+			
+		}
+ 
+		
+
+		.input-design:focus{
+			background: #CEDEDD;
+			outline: none;
+		}
+
+		.right-icon{
+	        position: absolute;
+		    top: 79px;
+		    right: 81px;
+		    font-size: 20px;
+		    
+		}
+
+		li{
+			list-style: none;
+		}
+
+		#custom-ul{
+			width: 64%;
+		    background: red;
+		    position: absolute;
+		    left: 140px;
+		    display: none;
+		}
+	</style>
+</head>
+<body>
+
+	<div class="container">
+		<div class="form">
+			<h1 align="center">Custom Select Two Example</h1>
+			<hr>
+			<br><br>
+			<span style="font-size: 26px;">Select Name:</span>
+			<input type="text" id="input_field" class="input-design">
+
+			<i class="fa fa-angle-right right-icon" id="icon" aria-hidden="true"></i>
+
+			<ul id="custom-ul">
+				
+			</ul>
+		</div>
+	</div>
+</body>
+
+<script>
+	var inputField = document.querySelector('#input_field')
+
+	console.log(inputField)
+
+	inputField.addEventListener('keyup',function(){
+		downArrow()
+	})
+
+	inputField.addEventListener('focus',function(){
+		downArrow()
+	})
+
+	inputField.addEventListener('blur',function(){
+		rightArrow()
+	})
+
+	function downArrow(){
+		var changeIcon = document.querySelector('#icon')
+		changeIcon.classList.remove("fa-angle-right")
+		changeIcon.classList.add("fa-angle-down")
+
+		var listDisplay = document.querySelector('#custom-ul')
+		listDisplay.style.display = 'block';
+
+		console.log(changeIcon)
+		
+	}
+
+	function rightArrow(){
+		var changeIcon = document.querySelector('#icon')
+		changeIcon.classList.remove("fa-angle-down")
+		changeIcon.classList.add("fa-angle-right")
+
+		var listDisplay = document.querySelector('#custom-ul')
+		listDisplay.style.display = 'none';
+		console.log(changeIcon)
+		
+	}
+
+
+	var listArray = ['one','two','three','four','five']
+    var listItem = '';
+	listArray.map(item=>{
+		listItem += '<li align="center">'+item+'</li>'
+		console.log(item)
+	})
+
+
+	var customUl = document.querySelector('#custom-ul')
+
+	customUl.innerHTML = listItem;
+
+	console.log(customUl)
+
+
+</script>
+</html>
