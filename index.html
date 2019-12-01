@@ -60,11 +60,25 @@
 
 		li{
 			list-style: none;
+			font-size: 25px;
+			font-style: italic;
+			margin-bottom: 2px;
+			background: #260246;
+			color: white;
+
+		}
+
+		li:hover{
+			background: #0B6D72;
+			
+			cursor: pointer;
+			transform: skew(20deg);
+			transition: .2s;
 		}
 
 		#custom-ul{
 			width: 64%;
-		    background: red;
+		    background: #F1F8F8;
 		    position: absolute;
 		    left: 140px;
 		    display: none;
@@ -91,10 +105,20 @@
 </body>
 
 <script>
-	var inputField = document.querySelector('#input_field')
+	
+	var listArray = ['one','two','three','four','five']
+    var listItem = '';
+	listArray.map(item=>{
+		listItem += '<li align="center">'+item+'</li>'
+		
+	})
 
-	console.log(inputField)
+	var customUl = document.querySelector('#custom-ul')
 
+	customUl.innerHTML = listItem;
+
+	
+    var inputField = document.querySelector('#input_field')
 	inputField.addEventListener('keyup',function(){
 		downArrow()
 	})
@@ -108,6 +132,7 @@
 	})
 
 	function downArrow(){
+		console.log(inputField.value)
 		var changeIcon = document.querySelector('#icon')
 		changeIcon.classList.remove("fa-angle-right")
 		changeIcon.classList.add("fa-angle-down")
@@ -115,7 +140,32 @@
 		var listDisplay = document.querySelector('#custom-ul')
 		listDisplay.style.display = 'block';
 
-		console.log(changeIcon)
+
+		
+
+		var newListArray = listArray.filter(function (item) {
+			
+			console.log(item.match(inputField.value))
+			if (item.match(inputField.value) || (!inputField.value)) return true;
+			return false;
+		});
+
+		console.log(newListArray)
+
+
+	    var listItem = '';
+		newListArray.map(item=>{
+			listItem += '<li align="center">'+item+'</li>'
+			
+		})
+
+		var customUl = document.querySelector('#custom-ul')
+
+		customUl.innerHTML = listItem;
+
+
+		
+		
 		
 	}
 
@@ -126,24 +176,19 @@
 
 		var listDisplay = document.querySelector('#custom-ul')
 		listDisplay.style.display = 'none';
-		console.log(changeIcon)
+		
 		
 	}
 
 
-	var listArray = ['one','two','three','four','five']
-    var listItem = '';
-	listArray.map(item=>{
-		listItem += '<li align="center">'+item+'</li>'
-		console.log(item)
-	})
+	
 
 
-	var customUl = document.querySelector('#custom-ul')
+	
 
-	customUl.innerHTML = listItem;
 
-	console.log(customUl)
+	// Create a new array from the wizard array
+// 
 
 
 </script>
