@@ -105,6 +105,12 @@
 </body>
 
 <script>
+
+	document.addEventListener('click',function(e){
+		if(e.target.id !="input_field"){
+			hideList();
+		}
+	})
 	
 	var listArray = ['one','two','three','four','five']
     var listItem = '';
