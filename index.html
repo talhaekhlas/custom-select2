@@ -109,7 +109,7 @@
 	var listArray = ['one','two','three','four','five']
     var listItem = '';
 	listArray.map(item=>{
-		listItem += '<li align="center">'+item+'</li>'
+		listItem += '<li  class="list-item" align="center">'+item+'</li>'
 		
 	})
 
@@ -117,22 +117,48 @@
 
 	customUl.innerHTML = listItem;
 
+
+	var liClick = document.querySelector('#custom-ul')
+	
+	liClick.addEventListener('click',function(){
+		
+		liClickAction(event)
+	})
+
+	function liClickAction(e)
+	{
+		console.log('li click')
+		var inputField = document.querySelector('#input_field')
+		inputField.value = e.target.innerText;
+		hideList()
+		
+	}
+
+
 	
     var inputField = document.querySelector('#input_field')
 	inputField.addEventListener('keyup',function(){
-		downArrow()
+		showList()
 	})
 
 	inputField.addEventListener('focus',function(){
-		downArrow()
+		var inputField = document.querySelector('#input_field')
+		inputField.value = '';
+		showList()
 	})
 
-	inputField.addEventListener('blur',function(){
-		rightArrow()
-	})
 
-	function downArrow(){
-		console.log(inputField.value)
+
+	// inputField.addEventListener('blur',function(){
+	// 	hideList()
+	// })
+
+
+
+
+
+	function showList(){
+		
 		var changeIcon = document.querySelector('#icon')
 		changeIcon.classList.remove("fa-angle-right")
 		changeIcon.classList.add("fa-angle-down")
@@ -145,17 +171,17 @@
 
 		var newListArray = listArray.filter(function (item) {
 			
-			console.log(item.match(inputField.value))
+			
 			if (item.match(inputField.value) || (!inputField.value)) return true;
 			return false;
 		});
 
-		console.log(newListArray)
+		
 
 
 	    var listItem = '';
 		newListArray.map(item=>{
-			listItem += '<li align="center">'+item+'</li>'
+			listItem += '<li  class="list-item" align="center">'+item+'</li>'
 			
 		})
 
@@ -169,7 +195,7 @@
 		
 	}
 
-	function rightArrow(){
+	function hideList(){
 		var changeIcon = document.querySelector('#icon')
 		changeIcon.classList.remove("fa-angle-down")
 		changeIcon.classList.add("fa-angle-right")
@@ -182,14 +208,5 @@
 
 
 	
-
-
-	
-
-
-	// Create a new array from the wizard array
-// 
-
-
 </script>
 </html>
