@@ -143,8 +143,29 @@
 
 	inputField.addEventListener('focus',function(){
 		var inputField = document.querySelector('#input_field')
-		inputField.value = '';
+		//inputField.value = '';
 		showList()
+	})
+
+    
+    var totalKeyDownPress = 0
+    var totalKeyUpPress = 0
+
+    var actualPosition = 0;
+
+	inputField.addEventListener('keydown',function(e){
+
+		if(e.keyCode == '40') totalKeyDownPress++;
+		if(e.keyCode == '38') totalKeyUpPress++;
+
+		actualPosition = totalKeyDownPress - totalKeyUpPress;
+
+
+		
+
+		console.log('actual position',actualPosition)
+		
+		// showList()
 	})
 
 
