@@ -92,8 +92,8 @@
 			<h1 align="center">Custom Select Two Example</h1>
 			<hr>
 			<br><br>
-			<span style="font-size: 26px;">Select Name:</span>
-			<input type="text" id="input_field" class="input-design">
+			<span style="font-size: 26px;">Select Serial:</span>
+			<input type="text" id="input_field" placeholder="pleace select serial" class="input-design">
 
 			<i class="fa fa-angle-right right-icon" id="icon" aria-hidden="true"></i>
 
@@ -105,6 +105,12 @@
 </body>
 
 <script>
+
+	document.addEventListener('click',function(e){
+		if(e.target.id !="input_field"){
+			hideList();
+		}
+	})
 	
 	var listArray = ['one','two','three','four','five']
     var listItem = '';
