@@ -83,6 +83,10 @@
 		    left: 140px;
 		    display: none;
 		}
+
+		.selectedItem{
+			background: green;
+		}
 	</style>
 </head>
 <body>
@@ -105,6 +109,12 @@
 </body>
 
 <script>
+
+	document.addEventListener('click',function(e){
+		if(e.target.id !="input_field"){
+			hideList();
+		}
+	})
 	
 	var listArray = ['one','two','three','four','five']
     var listItem = '';
@@ -138,12 +148,20 @@
 	
     var inputField = document.querySelector('#input_field')
 	inputField.addEventListener('keyup',function(){
+
+		console.log('keyup')
 		showList()
+		if(actualPosition>0){
+			var selectedItem = document.querySelector('#custom-ul').children[actualPosition-1]
+
+		    selectedItem.classList.add('selectedItem')
+
+		}
 	})
 
 	inputField.addEventListener('focus',function(){
 		var inputField = document.querySelector('#input_field')
-		//inputField.value = '';
+		inputField.value = '';
 		showList()
 	})
 
@@ -155,15 +173,51 @@
 
 	inputField.addEventListener('keydown',function(e){
 
-		if(e.keyCode == '40') totalKeyDownPress++;
-		if(e.keyCode == '38') totalKeyUpPress++;
+		console.log('keydown')
+
+		totalChild = document.querySelector('#custom-ul').childElementCount
+
+		if(e.which == '40') totalKeyDownPress++;
+		else if(e.which == '38') totalKeyUpPress++;
+		else {totalKeyDownPress=0; totalKeyUpPress=0;}
+
+		
+
+		if(totalKeyDownPress>totalChild) totalKeyDownPress=totalChild;
+
+		 if(totalKeyDownPress==totalChild && totalKeyUpPress==totalChild-1){
+			totalKeyDownPress = 1;
+			totalKeyUpPress = 0;
+		   
+		}
 
 		actualPosition = totalKeyDownPress - totalKeyUpPress;
 
 
+
+	    if(actualPosition<=0){
+			totalKeyDownPress = 0
+		    totalKeyUpPress = 0
+		    actualPosition = 0;
+		}
+
+
 		
 
-		console.log('actual position',actualPosition)
+		
+
+
+		// if(actualPosition>0){
+		// 	var selectedItem = document.querySelector('#custom-ul').children[actualPosition-1]
+
+		//     selectedItem.classList.add('selectedItem')
+
+		// }
+		
+
+
+		console.log('actual,down,up',actualPosition,totalKeyDownPress,totalKeyUpPress)
+		
 		
 		// showList()
 	})
