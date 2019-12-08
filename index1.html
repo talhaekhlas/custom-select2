@@ -127,29 +127,22 @@
 
 	customUl.innerHTML = listItem;
 
+	var changeIcon = document.querySelector('#icon')
 
-	var liClick = document.querySelector('#custom-ul')
-	
-	liClick.addEventListener('click',function(){
+	var inputField = document.querySelector('#input_field')
+
+	//click event of ul div 
+	customUl.addEventListener('click',function(event){
 		
-		liClickAction(event)
+		inputField.value = event.target.innerText;
+		hideList()
 	})
 
-	function liClickAction(e)
-	{
-		console.log('li click')
-		var inputField = document.querySelector('#input_field')
-		inputField.value = e.target.innerText;
-		hideList()
-		
-	}
 
-
-	
-    var inputField = document.querySelector('#input_field')
+     // keyup event
 	inputField.addEventListener('keyup',function(){
 
-		console.log('keyup')
+		
 		showList()
 		if(actualPosition>0){
 			var selectedItem = document.querySelector('#custom-ul').children[actualPosition-1]
@@ -157,13 +150,25 @@
 		    selectedItem.classList.add('selectedItem')
 
 		}
+
+		if(checkEnterPress) {
+			
+		    customUl.style.display = 'none';
+		}
+
+		checkEnterPress = 0
 	})
 
+	//focus event
+
 	inputField.addEventListener('focus',function(){
-		var inputField = document.querySelector('#input_field')
+		
 		inputField.value = '';
 		showList()
 	})
+
+
+	//keydown event
 
     
     var totalKeyDownPress = 0
@@ -171,11 +176,30 @@
 
     var actualPosition = 0;
 
+    var checkEnterPress = 0;
+
+
 	inputField.addEventListener('keydown',function(e){
 
-		console.log('keydown')
+		
 
-		totalChild = document.querySelector('#custom-ul').childElementCount
+		if(e.which==13){
+
+			var selectedItemTest = document.querySelector('.selectedItem')
+
+			
+			checkEnterPress = 1
+
+			if(selectedItemTest){
+				
+		        inputField.value = selectedItemTest.innerText;
+			}
+			
+		}
+
+
+
+		totalChild = customUl.childElementCount
 
 		if(e.which == '40') totalKeyDownPress++;
 		else if(e.which == '38') totalKeyUpPress++;
@@ -193,8 +217,6 @@
 
 		actualPosition = totalKeyDownPress - totalKeyUpPress;
 
-
-
 	    if(actualPosition<=0){
 			totalKeyDownPress = 0
 		    totalKeyUpPress = 0
@@ -202,47 +224,17 @@
 		}
 
 
-		
-
-		
-
-
-		// if(actualPosition>0){
-		// 	var selectedItem = document.querySelector('#custom-ul').children[actualPosition-1]
-
-		//     selectedItem.classList.add('selectedItem')
-
-		// }
-		
-
-
-		console.log('actual,down,up',actualPosition,totalKeyDownPress,totalKeyUpPress)
-		
-		
-		// showList()
 	})
-
-
-
-	// inputField.addEventListener('blur',function(){
-	// 	hideList()
-	// })
-
-
 
 
 
 	function showList(){
 		
-		var changeIcon = document.querySelector('#icon')
+		
 		changeIcon.classList.remove("fa-angle-right")
 		changeIcon.classList.add("fa-angle-down")
 
-		var listDisplay = document.querySelector('#custom-ul')
-		listDisplay.style.display = 'block';
-
-
-		
+		customUl.style.display = 'block';
 
 		var newListArray = listArray.filter(function (item) {
 			
@@ -251,8 +243,6 @@
 			return false;
 		});
 
-		
-
 
 	    var listItem = '';
 		newListArray.map(item=>{
@@ -260,21 +250,19 @@
 			
 		})
 
-		var customUl = document.querySelector('#custom-ul')
-
+		
 		customUl.innerHTML = listItem;
-
 
 		
 	}
 
 	function hideList(){
-		var changeIcon = document.querySelector('#icon')
+		
 		changeIcon.classList.remove("fa-angle-down")
+
 		changeIcon.classList.add("fa-angle-right")
 
-		var listDisplay = document.querySelector('#custom-ul')
-		listDisplay.style.display = 'none';
+		customUl.style.display = 'none';
 		
 		
 	}
