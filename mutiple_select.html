@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>multiple select 2</title>
+	<style>
+		*{
+			margin:0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+		.container{
+			width: 80%;
+			height: 100vh;
+			background: #765;
+			margin:auto;
+			position: relative;
+		}
+
+		.select-container{
+			width: 60%; height: 60vh; background: #189; left: 20%; padding: 50px; position: absolute;
+			min-width: 300px;
+		}
+		.input-field-design{
+			width: 100%;height: 30px;border-radius: 5px 5px 0px 0px;
+			border: 2px solid green;
+			padding-left: 5px;
+			padding-right: 5px; 
+		}
+
+		.input-field-design:focus{
+			border: 2px solid red;
+		}
+		.list-item{
+			list-style: none;
+			text-align: center;
+			background: black;
+			color: white;
+		}
+
+
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="select-container">
+			<h2 align="center" style="font-style: italic;">This is multiple select 2</h2>
+			<input type="text" name="name" id="name" class="input-field-design">
+			<ul id="ul-design">
+				
+			</ul>
+		</div>
+	</div>
+</body>
+
+<script>
+	var listObject = [{name:'one',id:1},
+				{name:'two',id:2},
+				{name:'three',id:3},
+				{name:'four',id:4},
+				{name:'five',id:5}
+	           ];
+
+	function objToList(){
+        listItem = ''
+		listObject.map((item,index)=>{
+			console.log(item)
+			listItem += '<li class="list-item">' + item.name + '</li>'
+		})
+
+		return listItem
+	}
+
+	var ulSection = document.querySelector('#ul-design'); 
+
+	ulSection.innerHTML = objToList();
+
+</script>
+</html>
