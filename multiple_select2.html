@@ -141,12 +141,14 @@
 		btn.style.padding = '2px'
 		btn.style.minWidth = '80px'
 
-		btn.innerHTML = '<div><span>'+e.target.innerText + '</span> <span class="cross">X</span><div>'; 
+		btn.innerHTML = '<span>'+e.target.innerText + '</span> <span class="cross">X</span>'; 
 
 
 		var dynamicElement = document.querySelector('#dynamic-element')
 
 		dynamicElement.appendChild(btn)
+
+		inputField.value = ''
 
 
 		
@@ -158,14 +160,59 @@
 
 	var inputField = document.querySelector('#input_field')
 
+	
+
 	inputField.addEventListener('focus',function(){
-		console.log('input field focus')
+		//console.log('input field focus')
 		ulSection.style.display = 'block'
 	})
 
-	inputField.addEventListener('keyup',function(e){
-		console.log(e.target.value)
 
+	var actualPosition = 0;
+	inputField.addEventListener('keydown',function(e){
+
+		var ulTotalChild = ulSection.childElementCount;
+
+		if(e.which==40) actualPosition++;
+		if(e.which==38) actualPosition--;
+		if(actualPosition<0) actualPosition=0;
+
+		if(actualPosition>ulTotalChild) actualPosition = ulTotalChild;
+
+		
+		ulSection.style.display = 'block'
+
+		
+
+
+
+		if(e.which==13 && actualPosition){
+
+    		var selectedData = ulSection.children[actualPosition-1].innerText;
+
+			var btn = document.createElement("BUTTON"); 
+
+			btn.style.margin = '2px'
+			btn.style.padding = '2px'
+			btn.style.minWidth = '80px'
+
+			btn.innerHTML = '<span>'+selectedData + '</span> <span class="cross">X</span>'; 
+
+
+			var dynamicElement = document.querySelector('#dynamic-element')
+
+			dynamicElement.appendChild(btn)
+
+			inputField.value = ''
+    	}
+
+
+	})
+
+
+
+	inputField.addEventListener('keyup',function(e){
+		
 		var searchText = e.target.value;
 
 		var filteredArray = listObject.filter((item,index)=>{
@@ -173,10 +220,33 @@
 			return false;
 		})
 
-		console.log(filteredArray)
-
-
 		ulSection.innerHTML = objToList(filteredArray);
+
+		if(actualPosition){
+			var selectedItem = ulSection.children[actualPosition-1]
+
+		    selectedItem.style.background = '#FF5733'
+		}
+
+
+		var dynamicElement = document.querySelector('#dynamic-element')
+
+		console.log(dynamicElement,dynamicElement.childElementCount)
+
+		var selectedItemArray = []
+
+		// for(var i = 1;i<=dynamicElement.childElementCount;i++){
+		// 	selectedItemArray[i] = dynamicElement.children[i].children[i].innerText
+		// }
+
+		console.log(dynamicElement.children[1])
+
+
+
+
+
+
+
 	})
 
 	
