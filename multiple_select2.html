@@ -53,6 +53,18 @@
 			padding: 5px;
 		}
 
+		.cross{
+			margin-left:15px;
+			background: black;
+			padding: 2px;
+			color: white;
+			cursor: pointer;
+		}
+
+		.cross:hover{
+			background: red;
+		}
+
 
 	</style>
 </head>
@@ -61,7 +73,10 @@
 		<div class="select-container">
 			<h2 align="center" style="font-style: italic;">This is multiple select 2</h2>
 			
-			<div class="select-area" id="select-section" contenteditable="true"></div>
+			<div class="select-area" id="select-section">
+				<div id="dynamic-element" style="display: inline"></div>
+				<input type="text" id="input_field" >
+			</div>
 			<ul id="ul-design">
 				
 			</ul>
@@ -99,23 +114,24 @@
 
 
 	selectArea.addEventListener('focus',function(e){
+		console.log('focus ')
 		ulSection.style.display = 'block'
 	})
 
 
 
 
-	selectArea.addEventListener('keyup',function(e){
-		var inputField = e.target.innerText;
+	// selectArea.addEventListener('keyup',function(e){
+	// 	var searchText = e.target.innerText;
 
-		var filteredArray = listObject.filter((item,index)=>{
-			if (item.name.match(inputField) || (!inputField)) return true;
-			return false;
-		})
+	// 	var filteredArray = listObject.filter((item,index)=>{
+	// 		if (item.name.match(searchText) || (!searchText)) return true;
+	// 		return false;
+	// 	})
 
 
-		ulSection.innerHTML = objToList(filteredArray);
-	})
+	// 	ulSection.innerHTML = objToList(filteredArray);
+	// })
 
 
 	ulSection.addEventListener('click',function(e){
@@ -125,16 +141,52 @@
 		btn.style.padding = '2px'
 		btn.style.minWidth = '80px'
 
-		btn.innerHTML = e.target.innerText;                  
-		selectArea.appendChild(btn); 
+		btn.innerHTML = '<div><span>'+e.target.innerText + '</span> <span class="cross">X</span><div>'; 
+
+
+		var dynamicElement = document.querySelector('#dynamic-element')
+
+		dynamicElement.appendChild(btn)
+
+
+		
+		// selectArea.insertAdjacentElement('afterbegin', btn)
 	})
+
+
+
+
+	var inputField = document.querySelector('#input_field')
+
+	inputField.addEventListener('focus',function(){
+		console.log('input field focus')
+		ulSection.style.display = 'block'
+	})
+
+	inputField.addEventListener('keyup',function(e){
+		console.log(e.target.value)
+
+		var searchText = e.target.value;
+
+		var filteredArray = listObject.filter((item,index)=>{
+			if (item.name.match(searchText) || (!searchText)) return true;
+			return false;
+		})
+
+		console.log(filteredArray)
+
+
+		ulSection.innerHTML = objToList(filteredArray);
+	})
+
+	
 
 
 
     document.addEventListener('click',function(e){
 
 
-		if(e.target.className != 'list-item' && e.target.id !="select-section"){
+		if(e.target.className != 'list-item' && e.target.id !="input_field"){
 			ulSection.style.display = 'none'
 		}
 
