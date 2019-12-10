@@ -41,7 +41,7 @@
 		}
 
 		.list-item:hover{
-			background: #FF5733;
+			background: #FF5733!important;
 
 		}
 
@@ -164,18 +164,31 @@
 
 		}
 
+
+
+
 		if(!selectedItemArray.includes(e.target.innerText)){
 			dynamicElement.appendChild(btn)
 
 		    inputField.value = ''
+		    e.target.style.background = 'green'
+		}else{
+
+			if(dynamicElement.childElementCount){
+			
+			for(var i = 0;i<=dynamicElement.childElementCount-1;i++){
+				if(dynamicElement.children[i].children[0].innerText == e.target.innerText){
+					dynamicElement.removeChild(dynamicElement.children[i])
+				}
+				
+			}
+
+           }
+
+			e.target.style.background = 'black'
 		}
 
 		
-
-		
-
-		e.target.style.background = 'green'
-
 		
 	})
 
@@ -228,7 +241,24 @@
 
 			var dynamicElement = document.querySelector('#dynamic-element')
 
-			dynamicElement.appendChild(btn)
+			
+
+			if(dynamicElement.childElementCount){
+				
+				for(var i = 0;i<=dynamicElement.childElementCount-1;i++){
+					selectedItemArray[i] = dynamicElement.children[i].children[0].innerText
+				}
+
+
+			}
+
+			if(!selectedItemArray.includes(selectedData)){
+				dynamicElement.appendChild(btn)
+			}
+
+
+
+			
 
 			inputField.value = ''
 
@@ -283,15 +313,6 @@
 		}
 
 		console.log(selectedItemArray)
-
-		
-
-		// console.log(dynamicElement.children[1])
-
-
-
-
-
 
 
 	})
