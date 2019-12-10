@@ -65,6 +65,11 @@
 			background: red;
 		}
 
+		#input_field{
+			outline: none;
+			border: 0;
+		}
+
 
 	</style>
 </head>
@@ -85,6 +90,11 @@
 </body>
 
 <script>
+
+
+
+
+	console.log(selectionArea)
 	
 
 	var selectedItemArray = []
@@ -94,6 +104,8 @@
 				{name:'four',id:4},
 				{name:'five',id:5}
 	           ];
+
+
 
 	function objToList(listObject){
 
@@ -324,14 +336,21 @@
     document.addEventListener('click',function(e){
 
 
-		if(e.target.className != 'list-item' && e.target.id !="input_field"){
+		if(e.target.className != 'list-item' && e.target.id !="input_field"  && e.target.id !="select-section" ){
 			ulSection.style.display = 'none'
 
 		}
 
-		
-
-
 	})
+
+	var selectionArea = document.querySelector('#select-section')
+
+	selectionArea.addEventListener('click',function(){
+		ulSection.style.display = 'block'
+		inputField.focus()
+
+		console.log('selction area clicked')
+	})
+
 </script>
 </html>
