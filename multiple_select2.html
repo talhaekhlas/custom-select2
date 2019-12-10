@@ -87,7 +87,7 @@
 <script>
 	
 
-
+	var selectedItemArray = []
 	var listObject = [{name:'one',id:1},
 				{name:'two',id:2},
 				{name:'three',id:3},
@@ -96,10 +96,17 @@
 	           ];
 
 	function objToList(listObject){
+
         listItem = ''
 		listObject.map((item,index)=>{
+
+			if(selectedItemArray.includes(item.name)){
+				listItem += '<li class="list-item" style="background:green">' + item.name + '</li>'
+			}else{
+				listItem += '<li class="list-item">' + item.name + '</li>'
+			}
 			
-			listItem += '<li class="list-item">' + item.name + '</li>'
+			
 		})
 
 		return listItem
@@ -111,6 +118,8 @@
  
 
 	var selectArea = document.querySelector('#select-section')
+
+	
 
 
 	selectArea.addEventListener('focus',function(e){
@@ -146,13 +155,28 @@
 
 		var dynamicElement = document.querySelector('#dynamic-element')
 
-		dynamicElement.appendChild(btn)
+		if(dynamicElement.childElementCount){
+			
+			for(var i = 0;i<=dynamicElement.childElementCount-1;i++){
+				selectedItemArray[i] = dynamicElement.children[i].children[0].innerText
+			}
 
-		inputField.value = ''
 
+		}
+
+		if(!selectedItemArray.includes(e.target.innerText)){
+			dynamicElement.appendChild(btn)
+
+		    inputField.value = ''
+		}
 
 		
-		// selectArea.insertAdjacentElement('afterbegin', btn)
+
+		
+
+		e.target.style.background = 'green'
+
+		
 	})
 
 
@@ -169,6 +193,7 @@
 
 
 	var actualPosition = 0;
+	var enterKeyCheck = 0;
 	inputField.addEventListener('keydown',function(e){
 
 		var ulTotalChild = ulSection.childElementCount;
@@ -185,10 +210,12 @@
 		
 
 
-
+		enterKeyCheck = 0;
 		if(e.which==13 && actualPosition){
 
     		var selectedData = ulSection.children[actualPosition-1].innerText;
+
+
 
 			var btn = document.createElement("BUTTON"); 
 
@@ -204,6 +231,8 @@
 			dynamicElement.appendChild(btn)
 
 			inputField.value = ''
+
+			enterKeyCheck = 13
     	}
 
 
@@ -229,17 +258,35 @@
 		}
 
 
+
+		if(actualPosition && enterKeyCheck){
+			var selectedItem = ulSection.children[actualPosition-1]
+
+		    selectedItem.style.background = 'green'
+		}
+
+		
+
+
 		var dynamicElement = document.querySelector('#dynamic-element')
 
-		console.log(dynamicElement,dynamicElement.childElementCount)
+		
 
-		var selectedItemArray = []
+		
+		if(dynamicElement.childElementCount){
+			
+			for(var i = 0;i<=dynamicElement.childElementCount-1;i++){
+				selectedItemArray[i] = dynamicElement.children[i].children[0].innerText
+			}
 
-		// for(var i = 1;i<=dynamicElement.childElementCount;i++){
-		// 	selectedItemArray[i] = dynamicElement.children[i].children[i].innerText
-		// }
 
-		console.log(dynamicElement.children[1])
+		}
+
+		console.log(selectedItemArray)
+
+		
+
+		// console.log(dynamicElement.children[1])
 
 
 
@@ -258,7 +305,10 @@
 
 		if(e.target.className != 'list-item' && e.target.id !="input_field"){
 			ulSection.style.display = 'none'
+
 		}
+
+		
 
 
 	})
