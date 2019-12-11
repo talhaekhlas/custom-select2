@@ -59,6 +59,7 @@
 			padding: 2px;
 			color: white;
 			cursor: pointer;
+			border-radius: 5px;
 		}
 
 		.cross:hover{
@@ -69,6 +70,14 @@
 			outline: none;
 			border: 0;
 		}
+
+		button{
+			border-radius: 2px;
+			/*border: 0;*/
+			outline: none;
+		}
+
+
 
 
 	</style>
@@ -91,11 +100,6 @@
 
 <script>
 
-
-
-
-	console.log(selectionArea)
-	
 
 	var selectedItemArray = []
 	var listObject = [{name:'one',id:1},
@@ -162,7 +166,7 @@
 		btn.style.padding = '2px'
 		btn.style.minWidth = '80px'
 
-		btn.innerHTML = '<span>'+e.target.innerText + '</span> <span class="cross">X</span>'; 
+		btn.innerHTML = '<span>'+e.target.innerText + '</span> <span onclick="removeElement(event)" class="cross">X</span>'; 
 
 
 		var dynamicElement = document.querySelector('#dynamic-element')
@@ -248,7 +252,7 @@
 			btn.style.padding = '2px'
 			btn.style.minWidth = '80px'
 
-			btn.innerHTML = '<span>'+selectedData + '</span> <span class="cross">X</span>'; 
+			btn.innerHTML = '<span>'+selectedData + '</span> <span onclick="removeElement(event)" class="cross">X</span>'; 
 
 
 			var dynamicElement = document.querySelector('#dynamic-element')
@@ -335,8 +339,8 @@
 
     document.addEventListener('click',function(e){
 
-
-		if(e.target.className != 'list-item' && e.target.id !="input_field"  && e.target.id !="select-section" ){
+    	
+		if(e.target.className != 'list-item' && e.target.id !="input_field"  && e.target.id !="select-section" && e.target.className !="cross" ){
 			ulSection.style.display = 'none'
 
 		}
@@ -351,6 +355,34 @@
 
 		console.log('selction area clicked')
 	})
+
+
+	function removeElement(e){
+		var dynamicElement = document.querySelector('#dynamic-element')
+		dynamicElement.removeChild(e.target.parentNode)
+
+		var actualText = e.target.parentNode.children[0].innerText
+
+
+		ulTotalChild = ulSection.childElementCount;
+
+
+
+		if(dynamicElement.childElementCount){
+			
+			for(var i = 0;i<ulTotalChild;i++){
+				if(ulSection.children[i].innerText == actualText){
+					ulSection.children[i].style.background = 'black'
+				}
+				console.log(ulSection.children[i])
+			}
+
+
+		}
+
+	}
+
+
 
 </script>
 </html>
