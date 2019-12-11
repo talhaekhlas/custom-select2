@@ -58,15 +58,17 @@
 
 		.cross{
 			margin-left:15px;
-			background: black;
+			background: #212F3D;
 			padding: 2px;
 			color: white;
 			cursor: pointer;
 			border-radius: 5px;
+			font-size: 10px;
 		}
 
 		.cross:hover{
 			background: red;
+			font-size: 12px;
 		}
 
 		#input_field{
@@ -79,9 +81,6 @@
 			/*border: 0;*/
 			outline: none;
 		}
-
-
-
 
 	</style>
 </head>
@@ -142,8 +141,6 @@
 	ulSection.innerHTML = objToList(listObject);
  
 
-
-
 	selectionArea.addEventListener('focus',function(e){
 		ulSection.style.display = 'block'
 	})
@@ -171,7 +168,6 @@
 		ulSection.style.display = 'block'
 		inputField.focus()
 	})
-
 
 
 
@@ -210,15 +206,12 @@
 				
 			}
 
-			e.target.style.background = 'black'
+			e.target.style.background = '#212F3D'
 		}
 
 		
 		
 	})
-
-
-	
 
 
 	
@@ -260,8 +253,6 @@
 				selectedItemArray[i] = dynamicElement.children[i].children[0].innerText
 			}
 
-
-		
 
 			if(!selectedItemArray.includes(selectedData)){
 				dynamicElement.appendChild(btn)
@@ -329,7 +320,7 @@
 		for(var i = 0;i<ulTotalChild;i++){
 			if(ulSection.children[i].innerText == actualText){
 				console.log(actualText)
-				ulSection.children[i].style.background = 'black'
+				ulSection.children[i].style.background = '#212F3D'
 			}
 			
 		}
