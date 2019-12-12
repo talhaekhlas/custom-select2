@@ -172,6 +172,13 @@
 
 
 	ulSection.addEventListener('click',function(e){
+
+		console.log(e.target)
+
+		if(e.target.className!='list-item'){
+			return;
+		}
+
 		var btn = document.createElement("BUTTON"); 
 
 		btn.style.margin = '2px'
