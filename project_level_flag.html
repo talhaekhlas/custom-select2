@@ -11,41 +11,97 @@
 		}
 
 		.task_list_area{
-			width: 80%;
+			width: 50%;
+			min-width: 300px;
 			height: 100vh;
 			
 			position: absolute;
-			left: 10%;
+			left: 25%;
 			top: 50px;
 
 		}
 
 		.list_item{
 			list-style: none;
-		    background: black;
+		    background: #F2F3F4;
 		    margin: 2px;
-		    color: white;
-		    text-align: center;
 		    height: 30px;
 		    padding: 5px;
+		    cursor: pointer;
 		}
+
+		#ul_design{
+			min-width: 250px;
+		}
+
+		.list_input{
+			height: 25px;
+			width: 100%;
+			outline: none;
+			border-bottom: 1px solid black;
+			border-top: 0;
+			border-left: 0;
+			border-right: 0;
+		}
+
 
 	</style>
 </head>
 <body>
 	<div class="task_list_area">
 		<h3 align="center">Task List</h3>
-		<ul>
-			<li class="list_item">Task one</li>
-			<li class="list_item">Task two</li>
-			<li class="list_item">Task three</li>
-			<li class="list_item">Task four</li>
-			<li class="list_item">Task five</li>
-			<li class="list_item">Task six</li>
+		<ul id="ul_design">
+			<li class="list_item"><span>Task one</span></li>
+			<li class="list_item"><span>Task two</span></li>
+			<li class="list_item"><span>Task three</span></li>
+			<li class="list_item"><span>Task four</span></li>
+			<li class="list_item"><span>Task five</span></li>
+			<li class="list_item"><span>Task six</span></li>
 		</ul>
 	</div>
 </body>
 	<script>
-		
+		var ulSection = $('#ul_design')
+
+		ulTotalChild = ulSection.childElementCount;
+
+
+		ulSection.addEventListener('click',function(e){
+
+			if(e.target.id=='ul_design') return 0;
+
+			e.target.style.background = 'white'
+
+			var data  = e.target.innerText;
+
+			for(var i=0;i<ulTotalChild;i++){
+				if(ulSection.children[i]==e.target){
+					var inputField  = document.createElement("INPUT"); 
+
+					inputField.classList.add('list_input')
+
+					inputField.value = data;
+
+					e.target.removeChild(e.target.children[0])
+
+					e.target.appendChild(inputField)
+					inputField.focus()
+				}else{
+					
+				}
+			}
+
+			
+
+
+
+			console.log(e.target.innerText,e.target.children)
+			
+		})
+
+
+		function $(selectElement){
+			return document.querySelector(selectElement)
+		}
 	</script>
 </html>
