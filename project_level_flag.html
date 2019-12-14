@@ -21,9 +21,9 @@
 
 		}
 
-		.list_item{
+		.task_list_item{
 			list-style: none;
-		    background: #F2F3F4;
+		    background: #FF5733;
 		    margin: 2px;
 		    height: 30px;
 		    padding: 5px;
@@ -32,9 +32,35 @@
 
 		#ul_design{
 			min-width: 250px;
+			position: relative;
 		}
 
-		.list_input{
+		#project_list{
+		    width: 100%;
+		    height: 200px;
+		    overflow: scroll;
+		    
+		    position: absolute;
+		    top: 55px;
+		    display: none;
+		}
+
+		.project_list_item{
+			list-style: none;
+		    background: black;
+		    
+		    height: 30px;
+		    padding: 5px;
+		    cursor: pointer;
+		    color:white;
+		}
+
+
+		/*.span_text{
+			display: block;
+		}*/
+
+		.iuput_field{
 			height: 25px;
 			width: 100%;
 			outline: none;
@@ -42,7 +68,10 @@
 			border-top: 0;
 			border-left: 0;
 			border-right: 0;
+			display: none;
 		}
+
+
 
 
 	</style>
@@ -51,53 +80,121 @@
 	<div class="task_list_area">
 		<h3 align="center">Task List</h3>
 		<ul id="ul_design">
-			<li class="list_item"><span>Task one</span></li>
-			<li class="list_item"><span>Task two</span></li>
-			<li class="list_item"><span>Task three</span></li>
-			<li class="list_item"><span>Task four</span></li>
-			<li class="list_item"><span>Task five</span></li>
-			<li class="list_item"><span>Task six</span></li>
+			<li class="task_list_item">
+				<span class="span_text">Task one</span>
+				<input type="text" class="iuput_field">
+			</li>
+			<li class="task_list_item">
+				<span class="span_text">Task two</span>
+				<input type="text" class="iuput_field">
+			</li>
+			<li class="task_list_item">
+				<span class="span_text">Task three</span>
+				<input type="text" class="iuput_field">
+			</li>
+			<li class="task_list_item">
+				<span class="span_text">Task four</span>
+				<input type="text" class="iuput_field">
+			</li>
+			<li class="task_list_item">
+				<span class="span_text">Task five</span>
+				<input type="text" class="iuput_field">
+			</li>
+			
 		</ul>
+		<div id="project_list">
+			<ul id="project_list_ul">
+				<li class="project_list_item">project one</li>
+				<hr>
+				<li class="project_list_item">Project two</li>
+				<hr>
+				<li class="project_list_item">Project three</li>
+				<hr>
+				<li class="project_list_item">Project four</li>
+				<hr>
+				<li class="project_list_item">Project five</li>
+				<hr>
+				<li class="project_list_item">Project six</li>
+				<hr>
+				<li class="project_list_item">Project seven</li>
+				<hr>
+				<li class="project_list_item">Project eight</li>
+				
+			</ul>
+		</div>
 	</div>
 </body>
 	<script>
 		var ulSection = $('#ul_design')
+
+		var projectList = $('#project_list')
 
 		ulTotalChild = ulSection.childElementCount;
 
 
 		ulSection.addEventListener('click',function(e){
 
-			if(e.target.id=='ul_design') return 0;
+			if(e.target.id=='ul_design' || e.target.className=="iuput_field") return 0;
 
-			e.target.style.background = 'white'
 
-			var data  = e.target.innerText;
+			var clickedIndex = Array.prototype.indexOf.call(ulSection.children, e.target);
 
+			
+			
 			for(var i=0;i<ulTotalChild;i++){
-				if(ulSection.children[i]==e.target){
-					var inputField  = document.createElement("INPUT"); 
 
-					inputField.classList.add('list_input')
 
-					inputField.value = data;
 
-					e.target.removeChild(e.target.children[0])
-
-					e.target.appendChild(inputField)
-					inputField.focus()
-				}else{
+				if(i==clickedIndex){
 					
+
+					ulSection.children[i].style.background = 'white'
+
+					ulSection.children[i].children[1].value = e.target.children[0].innerText;
+
+					ulSection.children[i].children[1].style.display = 'block'
+
+					ulSection.children[i].children[0].style.display = 'none'
+
+					project_list.style.display = 'block'
+
+					projectList.style.top = 55+i*32+ 'px'
+					
+					ulSection.children[i].children[1].focus()
+				}else{
+
+					// console.log(ulSection.children[i].children[0])
+
+					ulSection.children[i].style.background = '#FF5733'
+
+					ulSection.children[i].children[1].value = ulSection.children[i].children[0].innerText;
+
+					ulSection.children[i].children[1].style.display = 'none'
+
+					ulSection.children[i].children[0].style.display = 'inline'
 				}
+				
 			}
 
-			
 
 
-
-			console.log(e.target.innerText,e.target.children)
 			
 		})
+
+
+		var inputField = $('.iuput_field')
+
+		inputField.addEventListener('keyup',function(e){
+			console.log(e.target.value)
+		})
+
+
+		projectList.addEventListener('click',function(){
+			projectList.style.display = 'none'
+		})
+
+
+
 
 
 		function $(selectElement){
