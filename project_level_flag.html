@@ -194,18 +194,26 @@
 
 		for(var i=0; i<taskNameMain.length;i++){
 
-			taskNameMain[i].addEventListener('click',myPrettyHandler.bind(null, event,i,10))
+			// taskNameMain[i].addEventListener('click',myPrettyHandler.bind(null, event,i,10))
+
+			taskNameMain[i].addEventListener('click',myFunc,false)
+			taskNameMain[i].listItemNo = i
+			taskNameMain[i].listItemNo1 = 2
 			
+		}
+
+		function myFunc(e){
+			console.log(e.currentTarget.listItemNo1)
 		}
 
 
 
-		function myPrettyHandler(a,b,c,d)
-		{
+		// function myPrettyHandler(a,b,c,d)
+		// {
 			
-			console.log(b)
+		// 	console.log(b)
 			
-		}
+		// }
 
 	
 		ulTotalChild = ulSection.childElementCount;
