@@ -41,7 +41,7 @@
 		.task_project_level_input{
 			background: green;
 			width:100%;
-			min-height: 17px;
+			/*min-height: 17px;*/
 		}
 
 		.task{
@@ -52,6 +52,16 @@
 			display: none;
 			margin-left: 1px;
 		}
+
+
+			.project_item{
+				background: purple;
+				/*padding: 2px;*/
+				margin-left: 2px;
+			}
+
+
+
 		.level{
 			display: none;
 			margin-left: 1px;
@@ -71,11 +81,12 @@
 
 
 
+
+
 		#project_list{
 		    width: 100%;
 		    height: 200px;
 		    overflow: scroll;
-		    
 		    position: absolute;
 		    top: 55px;
 		    display: none;
@@ -87,8 +98,13 @@
 		    
 		    height: 30px;
 		    padding: 5px;
+		    border-bottom: 2px solid white; 
 		    cursor: pointer;
 		    color:white;
+		}
+
+		.project_list_item:hover{
+			background: gray;
 		}
 
 
@@ -116,6 +132,14 @@
 
 
 	<div class="task_list_area">
+		
+
+
+		<div id="project_list">
+			<ul id="project_list_ul">
+				
+			</ul>
+		</div>
 		<h3 align="center">Task List</h3>
 		<ul id="ul_design">
 			<li class="task_name_main">
@@ -123,7 +147,7 @@
 					<div class="task">Task One</div>
 					<div class="project"></div>
 					<div class="level"></div>
-					<div class="input_field"><input type="text"></div>
+					<div class="input_field"><input class="input" type="text"></div>
 				</div>
 				<div class="asinged_project_level">
 					<div class="asinged_project"></div>
@@ -138,7 +162,7 @@
 					<div class="task">Task Two</div>
 					<div class="project"></div>
 					<div class="level"></div>
-					<div class="input_field"></div>
+					<div class="input_field"><input class="input" type="text"></div>
 				</div>
 				<div class="asinged_project_level">
 					<div class="asinged_project"></div>
@@ -151,7 +175,7 @@
 					<div class="task">Task Three</div>
 					<div class="project"></div>
 					<div class="level"></div>
-					<div class="input_field"></div>
+					<div class="input_field"><input class="input" type="text"></div>
 				</div>
 				<div class="asinged_project_level">
 					<div class="asinged_project"></div>
@@ -161,49 +185,171 @@
 			
 			
 		</ul>
-
-
-		<div id="project_list">
-			<ul id="project_list_ul">
-				<li class="project_list_item">project one</li>
-				<hr>
-				<li class="project_list_item">Project two</li>
-				<hr>
-				<li class="project_list_item">Project three</li>
-				<hr>
-				<li class="project_list_item">Project four</li>
-				<hr>
-				<li class="project_list_item">Project five</li>
-				<hr>
-				<li class="project_list_item">Project six</li>
-				<hr>
-				<li class="project_list_item">Project seven</li>
-				<hr>
-				<li class="project_list_item">Project eight</li>
-				
-			</ul>
-		</div>
 	</div>
 </body>
 	<script>
+		var projectListArray = [
+		'project one',
+		'project two',
+		'project three',
+		'project four',
+		'project five',
+		'project six',
+		'project seven',
+		'project eight']
 		var ulSection = $('#ul_design')
+		var ulTotalChild = ulSection.childElementCount;
 
 		var projectList = $('#project_list')
 
+
+
+		var projectListUl = $('#project_list_ul')
+
+		var projectListItem = ''
+
+		projectListArray.map(item=>{
+			projectListItem += '<li class="project_list_item">'+item+'</li>'
+		})
+
+		projectListUl.innerHTML = projectListItem
+
 		var taskNameMain = document.querySelectorAll('.task_name_main')
+
+		var targetClickedListNo = null;
+		
+
 
 		for(var i=0; i<taskNameMain.length;i++){
 
-			// taskNameMain[i].addEventListener('click',myPrettyHandler.bind(null, event,i,10))
-
 			taskNameMain[i].addEventListener('click',myFunc,false)
 			taskNameMain[i].listItemNo = i
-			taskNameMain[i].listItemNo1 = 2
+
+
+			
 			
 		}
 
+
 		function myFunc(e){
-			console.log(e.currentTarget.listItemNo1)
+
+			// var howMuchTop = 0;
+
+			// for(var x = 0; x<e.currentTarget.listItemNo;x++){
+			// 	howMuchTop += ulSection.children[x].clientHeight+2
+			// }
+
+			targetClickedListNo = e.currentTarget.listItemNo
+
+			
+			for(var j=0; j<ulTotalChild;j++){
+
+
+
+				if(j==e.currentTarget.listItemNo){
+					var dynamicInputField = ulSection.children[j].children[0].children[3]
+					dynamicInputField.style.display = 'inline'
+					dynamicInputField.children[0].focus()
+
+					// projectList.style.top = 49+howMuchTop+'px';
+					// projectList.style.display = 'block'
+					
+					// projectList.style.zIndex = 2;
+
+
+
+				}else{
+					var dynamicInputField = ulSection.children[j].children[0].children[3]
+					dynamicInputField.style.display = 'none'
+					
+				}
+
+
+
+			}
+
+
+			
+		}
+
+
+		var inputFieldAll = document.querySelectorAll('.input')
+
+
+
+		for(var a = 0; a<inputFieldAll.length; a++){
+
+			inputFieldAll[a].addEventListener('keyup',targetInputExecute,false)
+			inputFieldAll[a].inputNo = a
+		}
+
+
+		function targetInputExecute(e){
+			
+			var inputFieldValue = e.target.value;
+
+			// var res = inputFieldValue.match(/@/g);
+
+			// if(!res){
+			// 	projectList.style.display = 'none'
+			// 	return;
+			// }
+
+			if(e.target.value[0]!='@')return ;
+
+			var filterString = e.target.value.substring(1, e.target.value.length);
+
+			
+			filterProjectArray = projectListArray.filter(item=>{
+				if(item.match(filterString))return true;
+				return false;
+			})
+			projectListItem = ''
+			filterProjectArray.map(item=>{
+			projectListItem += '<li class="project_list_item">'+item+'</li>'
+			})
+
+		    projectListUl.innerHTML = projectListItem
+
+
+
+			console.log(projectListUl.childElementCount)
+
+			
+
+			var howMuchTop = 0;
+
+			for(var x = 0; x<e.currentTarget.inputNo;x++){
+				howMuchTop += ulSection.children[x].clientHeight+2
+			}
+
+
+			for(var b=0; b<ulTotalChild;b++){
+
+
+
+				if(b==e.currentTarget.inputNo){
+					// var dynamicInputField = ulSection.children[j].children[0].children[3]
+					// dynamicInputField.style.display = 'inline'
+					// dynamicInputField.children[0].focus()
+
+					projectList.style.top = 49+howMuchTop+'px';
+					projectList.style.display = 'block'
+					
+					projectList.style.zIndex = 2;
+
+
+
+				}else{
+					// var dynamicInputField = ulSection.children[j].children[0].children[3]
+					// dynamicInputField.style.display = 'none'
+					
+				}
+
+
+
+			}
+
 		}
 
 
@@ -216,7 +362,7 @@
 		// }
 
 	
-		ulTotalChild = ulSection.childElementCount;
+		
 
 
 
@@ -285,10 +431,69 @@
 		// 	console.log(e.target.value)
 		// })
 
+		// document.addEventListener('click',function(e){
+		// 	var t = e.target
+		// 	if(t.className  == 'task_name_main' ||
+		// 		t.className == 'task_project_level_input' ||
+		// 		t.className == 'task' ||
+		// 		t.className == 'project' ||
+		// 		t.className == 'level' ||
+		// 		t.className == 'iuput_field' || 
+		// 		t.className =='input' ||
+		// 		t.className == 'asinged_project_level' ||
+		// 		t.className == 'asinged_project' ||
+		// 		t.className == 'asinged_level'){
+		// 		projectList.style.display = 'block'
+		// 	}else{
+		// 		projectList.style.display = 'none'
+		// 	}
 
-		// projectList.addEventListener('click',function(){
-		// 	projectList.style.display = 'none'
+
+			
 		// })
+
+		document.addEventListener('click',function(){
+			projectList.style.display = 'none'
+		})
+
+
+		projectList.addEventListener('click',function(e){
+			
+
+			var targetInputField = ulSection.
+			children[targetClickedListNo].
+			children[0].children[3].
+			children[0]
+
+
+			var projectName = document.createElement('SPAN')
+			projectName.classList.add('project_item')
+
+			projectName.innerText = e.target.innerText
+
+			var whereAddProject = ulSection.
+			children[targetClickedListNo].
+			children[0].
+			children[1]
+
+			whereAddProject.appendChild(projectName)
+			whereAddProject.style.display = 'inline'
+
+
+			console.log(whereAddProject)
+
+			console.log(projectName)
+
+
+
+			targetInputField.value = ''
+			targetInputField.focus()
+
+			
+
+
+
+		})
 
 
 
