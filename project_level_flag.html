@@ -85,8 +85,8 @@
 
 		#project_list{
 		    width: 100%;
-		    height: 200px;
-		    overflow: scroll;
+		    /*height: 200px;*/
+		    /*overflow: scroll;*/
 		    position: absolute;
 		    top: 55px;
 		    display: none;
@@ -214,6 +214,9 @@
 
 		projectListUl.innerHTML = projectListItem
 
+		var actualPosition = 0
+		var enterKeyPress = 0
+
 		var taskNameMain = document.querySelectorAll('.task_name_main')
 
 		var targetClickedListNo = null;
@@ -232,6 +235,9 @@
 
 
 		function myFunc(e){
+
+			actualPosition = 0;
+			enterKeyPress = 0;
 
 			// var howMuchTop = 0;
 
@@ -279,13 +285,36 @@
 
 		for(var a = 0; a<inputFieldAll.length; a++){
 
-			inputFieldAll[a].addEventListener('keyup',targetInputExecute,false)
+			inputFieldAll[a].addEventListener('keyup',targetInputUp,false)
 			inputFieldAll[a].inputNo = a
+
+
+			inputFieldAll[a].addEventListener('keydown',targetInputDown,false)
+			inputFieldAll[a].inputNo = a
+
 		}
 
 
-		function targetInputExecute(e){
+
+
+		function targetInputDown(e){
+
+			if(e.target.value[0]!='@')return;
+			var totalProjectChild = $('#project_list_ul').childElementCount
+			if(e.which==40)actualPosition++;
+			if(e.which==38)actualPosition--;
+			if(e.which==13)enterKeyPress = 13;
+			if(actualPosition>totalProjectChild) actualPosition = totalProjectChild
+
+			if(actualPosition<0)actualPosition = 0;
+
 			
+		}
+
+
+		function targetInputUp(e){
+			
+
 			var inputFieldValue = e.target.value;
 
 			// var res = inputFieldValue.match(/@/g);
@@ -304,6 +333,7 @@
 				if(item.match(filterString))return true;
 				return false;
 			})
+
 			projectListItem = ''
 			filterProjectArray.map(item=>{
 			projectListItem += '<li class="project_list_item">'+item+'</li>'
@@ -313,10 +343,6 @@
 
 
 
-			console.log(projectListUl.childElementCount)
-
-			
-
 			var howMuchTop = 0;
 
 			for(var x = 0; x<e.currentTarget.inputNo;x++){
@@ -325,8 +351,6 @@
 
 
 			for(var b=0; b<ulTotalChild;b++){
-
-
 
 				if(b==e.currentTarget.inputNo){
 					// var dynamicInputField = ulSection.children[j].children[0].children[3]
@@ -349,6 +373,62 @@
 
 
 			}
+
+
+			var totalProjectChild = $('#project_list_ul').childElementCount
+
+			console.log(actualPosition)
+
+			for(d=1;d<=totalProjectChild;d++){
+
+				if(actualPosition == d && actualPosition){
+					$('#project_list_ul').children[actualPosition-1].style.background = 'red'
+				}
+
+				if(actualPosition == d && actualPosition && enterKeyPress){
+
+					
+
+					var targetInputField = ulSection.
+					children[targetClickedListNo].
+					children[0].children[3].
+					children[0]
+
+
+					var projectName = document.createElement('SPAN')
+					projectName.classList.add('project_item')
+
+					projectName.innerText = $('#project_list_ul').children[actualPosition-1].innerText
+
+
+
+					var whereAddProject = ulSection.
+					children[targetClickedListNo].
+					children[0].
+					children[1]
+
+					// console.log(whereAddProject)
+
+					// return;
+
+					whereAddProject.appendChild(projectName)
+					whereAddProject.style.display = 'inline'
+
+					targetInputField.value = ''
+					targetInputField.focus()
+
+					actualPosition = 0
+					enterKeyPress = 0
+
+					projectList.style.display = 'none'
+
+				}
+
+			}
+
+
+			
+
 
 		}
 
@@ -479,15 +559,11 @@
 			whereAddProject.appendChild(projectName)
 			whereAddProject.style.display = 'inline'
 
-
-			console.log(whereAddProject)
-
-			console.log(projectName)
-
-
-
 			targetInputField.value = ''
 			targetInputField.focus()
+
+			actualPosition = 0
+			enterKeyPress = 0
 
 			
 
