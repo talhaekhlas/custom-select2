@@ -123,6 +123,10 @@
 			display: none;
 		}
 
+		.cross{
+			background:white;
+		}
+
 
 
 
@@ -400,6 +404,11 @@
 
 					projectName.innerText = $('#project_list_ul').children[actualPosition-1].innerText
 
+					var cross = document.createElement('SPAN')
+					cross.classList.add('cross')
+
+					cross.innerText = 'X'
+
 
 
 					var whereAddProject = ulSection.
@@ -412,6 +421,9 @@
 					// return;
 
 					whereAddProject.appendChild(projectName)
+					whereAddProject.appendChild(cross)
+
+
 					whereAddProject.style.display = 'inline'
 
 					targetInputField.value = ''
@@ -556,7 +568,13 @@
 			children[0].
 			children[1]
 
+			var cross = document.createElement('SPAN')
+			cross.classList.add('cross')
+			cross.innerText = 'X'
+
+
 			whereAddProject.appendChild(projectName)
+			whereAddProject.appendChild(cross)
 			whereAddProject.style.display = 'inline'
 
 			targetInputField.value = ''
