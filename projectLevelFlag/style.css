@@ -1,0 +1,119 @@
+*{
+			margin:0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		.task_list_area{
+			width: 50%;
+			min-width: 300px;
+			height: 100vh;
+			
+			position: absolute;
+			left: 25%;
+			top: 50px;
+
+		}
+
+		#ul_design{
+			min-width: 250px;
+			position: relative;
+		}
+
+
+
+
+		.task_name_main{
+			list-style: none;
+		    background: #FF5733;
+		    margin: 2px;
+		    min-height: 30px;
+		    padding: 5px;
+		    cursor: pointer;
+		}
+
+		.task_project_level_input{
+			background: green;
+			width:100%;
+			/*min-height: 17px;*/
+		}
+
+		.task{
+			display: inline;
+			margin-left: 1px;
+		}
+		.project{
+			display: none;
+			margin-left: 1px;
+		}
+
+
+			.project_item{
+				background: purple;
+				/*padding: 2px;*/
+				margin-left: 2px;
+			}
+
+
+
+		.level{
+			display: none;
+			margin-left: 1px;
+		}
+		.input_field{
+			display: none;
+			margin-left: 1px;
+		}
+
+		.asinged_project_level{
+			background: gray;
+			width:100%;
+			min-height: 17px;
+		}
+
+
+		#project_list{
+		    width: 100%;
+		    position: absolute;
+		    top: 55px;
+		    display: none;
+		}
+
+		.project_list_item{
+			list-style: none;
+		    background: black;
+		    
+		    height: 30px;
+		    padding: 5px;
+		    border-bottom: 2px solid white; 
+		    cursor: pointer;
+		    color:white;
+		}
+
+		.project_list_item:hover{
+			background: gray;
+		}
+
+		.iuput_field{
+			height: 25px;
+			width: 100%;
+			outline: none;
+			border-bottom: 1px solid black;
+			border-top: 0;
+			border-left: 0;
+			border-right: 0;
+			display: none;
+		}
+
+		.cross{
+			background:white;
+		}
+		.cross:hover{
+			background: red
+		}
+
+		.project_item_for_show{
+			background: purple;
+			margin-left: 2px;
+			font-style: italic;
+		}
