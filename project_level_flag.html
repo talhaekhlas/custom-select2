@@ -137,7 +137,7 @@
 </head>
 <body>
 
-	<span class="cross">X</span>
+	
 
 	<div class="task_list_area">
 		
@@ -433,6 +433,12 @@
 					whereAddProject.appendChild(projectName)
 					whereAddProject.appendChild(cross)
 
+					var crossSection = document.querySelectorAll('.cross')
+
+					for(m = 0;m<crossSection.length;m++){
+						crossSection[m].addEventListener('click',crossSectionDelete,false)
+					}
+
 
 					whereAddProject.style.display = 'inline'
 
@@ -582,9 +588,22 @@
 			cross.classList.add('cross')
 			cross.innerText = 'X'
 
+			
+
 
 			whereAddProject.appendChild(projectName)
 			whereAddProject.appendChild(cross)
+
+
+
+			var crossSection = document.querySelectorAll('.cross')
+
+			for(m = 0;m<crossSection.length;m++){
+				crossSection[m].addEventListener('click',crossSectionDelete,false)
+			}
+			
+
+
 			whereAddProject.style.display = 'inline'
 
 			targetInputField.value = ''
@@ -593,18 +612,23 @@
 			actualPosition = 0
 			enterKeyPress = 0
 
+
 			
 
 
 
 		})
 
-
-		var crossSection = document.querySelector('.cross')
-
-		crossSection.addEventListener('click',function(e){
+		function crossSectionDelete(e){
 			console.log(e.target)
-		})
+		}
+
+
+		// var crossSection = document.querySelector('.cross')
+
+		// crossSection.addEventListener('click',function(e){
+		// 	console.log(e.target)
+		// })
 
 
 
