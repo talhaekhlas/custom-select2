@@ -117,3 +117,23 @@
 			margin-left: 2px;
 			font-style: italic;
 		}
+
+/*for level start*/
+
+		#level_list{
+		    width: 100%;
+		    position: absolute;
+		    top: 55px;
+		    display: none;
+		}
+
+		.level_list_item{
+			list-style: none;
+		    background: #3354FF;
+		    
+		    height: 30px;
+		    padding: 5px;
+		    border-bottom: 2px solid white; 
+		    cursor: pointer;
+		    color:white;
+		}
