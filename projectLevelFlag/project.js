@@ -172,7 +172,7 @@ function targetInputUpFP(e){
 			var crossSection = document.querySelectorAll('.cross')
 
 			for(m = 0;m<crossSection.length;m++){
-				crossSection[m].addEventListener('click',crossSectionDelete,false)
+				crossSection[m].addEventListener('click',crossSectionDeleteFP,false)
 			}
 
 
@@ -257,7 +257,7 @@ projectList.addEventListener('click',function(e){
 })
 
 
-function crossSectionDelete(e){
+function crossSectionDeleteFP(e){
 	
 	var parentNode = e.target.parentNode
 	var index = Array.prototype.indexOf.call(parentNode.children,e.target)
