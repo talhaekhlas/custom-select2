@@ -29,17 +29,17 @@ var inputFieldAll = document.querySelectorAll('.input')
 
 for(var a = 0; a<inputFieldAll.length; a++){
 
-	inputFieldAll[a].addEventListener('keyup',targetInputUp,false)
+	inputFieldAll[a].addEventListener('keyup',targetInputUpFP,false)
 	inputFieldAll[a].inputNo = a
 
 
-	inputFieldAll[a].addEventListener('keydown',targetInputDown,false)
+	inputFieldAll[a].addEventListener('keydown',targetInputDownFP,false)
 	inputFieldAll[a].inputNo = a
 
 }
 
 
-function targetInputDown(e){
+function targetInputDownFP(e){
 
 	if(e.target.value[0]!='@')return;
 	var totalProjectChild = $('#project_list_ul').childElementCount
@@ -54,7 +54,7 @@ function targetInputDown(e){
 }
 
 
-function targetInputUp(e){
+function targetInputUpFP(e){
 	
 
 	var inputFieldValue = e.target.value;

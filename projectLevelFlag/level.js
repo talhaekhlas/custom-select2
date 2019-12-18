@@ -19,3 +19,19 @@ levelListArray.map(item=>{
 })
 
 levelListUl.innerHTML = levelListItem
+
+
+var actualPositionFL = 0
+var enterKeyPressFL = 0
+
+var inputFieldAll = document.querySelectorAll('.input')
+
+for(var a = 0; a<inputFieldAll.length; a++){
+
+	inputFieldAll[a].addEventListener('keyup',targetInputUpFL,false)
+	inputFieldAll[a].inputNo = a
+
+	inputFieldAll[a].addEventListener('keydown',targetInputDownFL,false)
+	inputFieldAll[a].inputNo = a
+
+}
