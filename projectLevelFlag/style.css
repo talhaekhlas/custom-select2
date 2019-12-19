@@ -25,15 +25,16 @@
 
 		.task_name_main{
 			list-style: none;
-		    background: #FF5733;
+		    /*background: #EFF4F6;*/
 		    margin: 2px;
 		    min-height: 30px;
 		    padding: 5px;
 		    cursor: pointer;
+		    border-bottom: 1px solid gray;
 		}
 
 		.task_project_level_input{
-			background: green;
+			/*background: green;*/
 			width:100%;
 			/*min-height: 17px;*/
 		}
@@ -49,8 +50,8 @@
 
 
 			.project_item{
-				background: purple;
-				/*padding: 2px;*/
+				background: #C70039;
+				padding: 1px;
 				margin-left: 2px;
 			}
 
@@ -60,13 +61,25 @@
 			display: none;
 			margin-left: 1px;
 		}
+			.level_item{
+				background: #0D96EC;
+				padding: 1px;
+				margin-left: 2px;
+			}
+
 		.input_field{
 			display: none;
 			margin-left: 1px;
+			
+		}
+
+		.input{
+			outline: none;
+			border: 0;
 		}
 
 		.asinged_project_level{
-			background: gray;
+			/*background: gray;*/
 			width:100%;
 			min-height: 17px;
 		}
@@ -105,8 +118,14 @@
 			display: none;
 		}
 
-		.cross{
-			background:white;
+		.crossP{
+			background:#FFC300;
+			padding: 1px;
+		}
+
+		.crossL{
+			background:black;
+			color:white;
 		}
 		.cross:hover{
 			background: red
@@ -114,6 +133,12 @@
 
 		.project_item_for_show{
 			background: purple;
+			margin-left: 2px;
+			font-style: italic;
+		}
+
+		.level_item_for_show{
+			background: #FFEF33;
 			margin-left: 2px;
 			font-style: italic;
 		}

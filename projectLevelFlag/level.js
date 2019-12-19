@@ -67,12 +67,27 @@ function targetInputUpFL(e){
 	}
 
 
+	var checkAddedLevel = e.currentTarget.
+	parentNode.
+	parentNode.
+	parentNode.
+	children[1].
+	children[1]
+
+	var addedLevelArray = []
+	for(i=0;i<checkAddedLevel.childElementCount;i++){
+		addedLevelArray[i] = checkAddedLevel.children[i].innerText
+	}
+
+
 
 	var filterString = e.target.value.substring(1, e.target.value.length);
 
 	
 	filterLevelArray = levelListArray.filter(item=>{
-		if(item.match(filterString))return true;
+		if(item.match(filterString) && (!addedLevelArray.includes(item))){
+			return true;
+		}
 		return false;
 	})
 
@@ -89,7 +104,8 @@ function targetInputUpFL(e){
 
 	var howMuchTop = 0;
 
-	for(var x = 0; x<e.currentTarget.inputNo;x++){
+	for(var x = 0; x<=e.currentTarget.inputNo;x++){
+		console.log(ulSection.children[x])
 		howMuchTop += ulSection.children[x].clientHeight+2
 	}
 
@@ -99,7 +115,7 @@ function targetInputUpFL(e){
 		if(b==e.currentTarget.inputNo){
 			
 
-			levelList.style.top = 49+howMuchTop+'px';
+			levelList.style.top = howMuchTop+'px';
 			levelList.style.display = 'block'
 			
 			levelList.style.zIndex = 2;
@@ -121,7 +137,7 @@ function targetInputUpFL(e){
 
 		if(actualPositionFL == d && actualPositionFL){
 
-			$('#level_list_ul').children[actualPositionFL-1].style.background = 'red'
+			$('#level_list_ul').children[actualPositionFL-1].style.background = '#0D617F'
 		}
 
 		if(actualPositionFL == d && actualPositionFL && enterKeyPressFL){
@@ -139,10 +155,10 @@ function targetInputUpFL(e){
 
 			levelName.innerText = $('#level_list_ul').children[actualPositionFL-1].innerText
 
-			var cross = document.createElement('SPAN')
-			cross.classList.add('cross')
+			var crossL = document.createElement('SPAN')
+			crossL.classList.add('crossL')
 
-			cross.innerText = 'X'
+			crossL.innerText = 'X'
 
 
 
@@ -153,7 +169,7 @@ function targetInputUpFL(e){
 
 			
 			whereAddLevel.appendChild(levelName)
-			whereAddLevel.appendChild(cross)
+			whereAddLevel.appendChild(crossL)
 
 			var whereShowLevel = ulSection.
 			children[targetClickedListNo].
@@ -170,10 +186,10 @@ function targetInputUpFL(e){
 
 
 
-			var crossSection = document.querySelectorAll('.cross')
+			var crossLSection = document.querySelectorAll('.crossL')
 
-			for(m = 0;m<crossSection.length;m++){
-				crossSection[m].addEventListener('click',crossSectionDeleteFL,false)
+			for(m = 0;m<crossLSection.length;m++){
+				crossLSection[m].addEventListener('click',crossLSectionDeleteFL,false)
 			}
 
 
@@ -196,7 +212,71 @@ function targetInputUpFL(e){
 }
 
 
-function crossSectionDeleteFL(e){
+document.addEventListener('click',function(){
+	levelList.style.display = 'none'
+})
+
+
+levelList.addEventListener('click',function(e){
+	
+
+	var targetInputField = ulSection.
+	children[targetClickedListNo].
+	children[0].children[3].
+	children[0]
+
+	var whereAddLevel = ulSection.
+	children[targetClickedListNo].
+	children[0].
+	children[2]
+
+
+	var levelName = document.createElement('SPAN')
+	levelName.classList.add('level_item')
+	levelName.innerText = e.target.innerText
+
+	var crossL = document.createElement('SPAN')
+	crossL.classList.add('crossL')
+	crossL.innerText = 'X'
+
+	whereAddLevel.appendChild(levelName)
+	whereAddLevel.appendChild(crossL)
+
+
+	var whereShowLevel = ulSection.
+	children[targetClickedListNo].
+	children[1].
+	children[1]
+
+	var levelNameForShow = document.createElement('SPAN')
+	levelNameForShow.classList.add('level_item_for_show')
+	levelNameForShow.innerText = e.target.innerText
+
+	whereShowLevel.appendChild(levelNameForShow)
+
+
+
+	var crossLSection = document.querySelectorAll('.crossL')
+
+	for(m = 0;m<crossLSection.length;m++){
+		crossLSection[m].addEventListener('click',crossLSectionDeleteFL,false)
+	}
+	
+
+
+	whereAddLevel.style.display = 'inline'
+
+	targetInputField.value = ''
+	targetInputField.focus()
+
+	actualPositionFL = 0
+	enterKeyPressFL = 0
+
+
+})
+
+
+function crossLSectionDeleteFL(e){
 	
 	var parentNode = e.target.parentNode
 	var index = Array.prototype.indexOf.call(parentNode.children,e.target)
@@ -207,7 +287,9 @@ function crossSectionDeleteFL(e){
 	parentNode.
 	parentNode.
 	children[1].
-	children[0]
+	children[1]
+
+	
 
 	
 
@@ -216,13 +298,11 @@ function crossSectionDeleteFL(e){
 	parentNode.
 	parentNode.
 	children[1].
-	children[0].children[indexDeleteShow]
-
+	children[1].children[indexDeleteShow]
 
 	
 	parentNode.removeChild(parentNode.children[index])
 	parentNode.removeChild(parentNode.children[index-1])
-
 
 	parentNodeForShow.removeChild(deleteFromShowNode)
 	

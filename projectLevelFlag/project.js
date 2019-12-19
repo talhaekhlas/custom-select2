@@ -65,15 +65,28 @@ function targetInputUpFP(e){
 		return ;
 	}
 
-	console.log('test')
-	
+
+	var checkAddedProject = e.currentTarget.
+	parentNode.
+	parentNode.
+	parentNode.
+	children[1].
+	children[0]
+
+	var addedProjectArray = []
+	for(i=0;i<checkAddedProject.childElementCount;i++){
+		addedProjectArray[i] = checkAddedProject.children[i].innerText
+	}
+
 	
 
 	var filterString = e.target.value.substring(1, e.target.value.length);
 
 	
 	filterProjectArray = projectListArray.filter(item=>{
-		if(item.match(filterString))return true;
+		if(item.match(filterString) && (!addedProjectArray.includes(item))){
+			return true;
+		}
 		return false;
 	})
 
@@ -88,7 +101,8 @@ function targetInputUpFP(e){
 
 	var howMuchTop = 0;
 
-	for(var x = 0; x<e.currentTarget.inputNo;x++){
+	for(var x = 0; x<=e.currentTarget.inputNo;x++){
+		console.log(ulSection.children[x].clientHeight)
 		howMuchTop += ulSection.children[x].clientHeight+2
 	}
 
@@ -97,8 +111,8 @@ function targetInputUpFP(e){
 
 		if(b==e.currentTarget.inputNo){
 			
-
-			projectList.style.top = 49+howMuchTop+'px';
+			
+			projectList.style.top = howMuchTop+'px';
 			projectList.style.display = 'block'
 			
 			projectList.style.zIndex = 2;
@@ -138,10 +152,10 @@ function targetInputUpFP(e){
 
 			projectName.innerText = $('#project_list_ul').children[actualPositionFP-1].innerText
 
-			var cross = document.createElement('SPAN')
-			cross.classList.add('cross')
+			var crossP = document.createElement('SPAN')
+			crossP.classList.add('crossP')
 
-			cross.innerText = 'X'
+			crossP.innerText = 'X'
 
 
 
@@ -152,7 +166,7 @@ function targetInputUpFP(e){
 
 			
 			whereAddProject.appendChild(projectName)
-			whereAddProject.appendChild(cross)
+			whereAddProject.appendChild(crossP)
 
 			var whereShowProject = ulSection.
 			children[targetClickedListNo].
@@ -169,10 +183,10 @@ function targetInputUpFP(e){
 
 
 
-			var crossSection = document.querySelectorAll('.cross')
+			var crossPSection = document.querySelectorAll('.crossP')
 
-			for(m = 0;m<crossSection.length;m++){
-				crossSection[m].addEventListener('click',crossSectionDeleteFP,false)
+			for(m = 0;m<crossPSection.length;m++){
+				crossPSection[m].addEventListener('click',crossPSectionDeleteFP,false)
 			}
 
 
@@ -216,12 +230,12 @@ projectList.addEventListener('click',function(e){
 	projectName.classList.add('project_item')
 	projectName.innerText = e.target.innerText
 
-	var cross = document.createElement('SPAN')
-	cross.classList.add('cross')
-	cross.innerText = 'X'
+	var crossP = document.createElement('SPAN')
+	crossP.classList.add('crossP')
+	crossP.innerText = 'X'
 
 	whereAddProject.appendChild(projectName)
-	whereAddProject.appendChild(cross)
+	whereAddProject.appendChild(crossP)
 
 
 	var whereShowProject = ulSection.
@@ -237,10 +251,10 @@ projectList.addEventListener('click',function(e){
 
 
 
-	var crossSection = document.querySelectorAll('.cross')
+	var crossPSection = document.querySelectorAll('.crossP')
 
-	for(m = 0;m<crossSection.length;m++){
-		crossSection[m].addEventListener('click',crossSectionDelete,false)
+	for(m = 0;m<crossPSection.length;m++){
+		crossPSection[m].addEventListener('click',crossPSectionDeleteFP,false)
 	}
 	
 
@@ -257,7 +271,7 @@ projectList.addEventListener('click',function(e){
 })
 
 
-function crossSectionDeleteFP(e){
+function crossPSectionDeleteFP(e){
 	
 	var parentNode = e.target.parentNode
 	var index = Array.prototype.indexOf.call(parentNode.children,e.target)
