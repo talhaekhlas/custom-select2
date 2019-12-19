@@ -102,7 +102,6 @@ function targetInputUpFP(e){
 	var howMuchTop = 0;
 
 	for(var x = 0; x<=e.currentTarget.inputNo;x++){
-		console.log(ulSection.children[x].clientHeight)
 		howMuchTop += ulSection.children[x].clientHeight+2
 	}
 
@@ -207,9 +206,6 @@ function targetInputUpFP(e){
 }
 
 
-document.addEventListener('click',function(){
-	projectList.style.display = 'none'
-})
 
 
 projectList.addEventListener('click',function(e){
@@ -303,4 +299,31 @@ function crossPSectionDeleteFP(e){
 	
 
 }
+
+
+document.addEventListener('click',function(e){
+
+	console.log(e.target.className)
+	projectList.style.display = 'none'
+
+	if(e.target.className == 'heading' ||
+	 e.target.className == 'task_list_area' || e.target.lang == 'en'){
+
+	 for(var i=0; i<ulSection.childElementCount; i++){
+
+	 	ulSection.children[i].style.background = '#F2F3F4' 
+
+	 	ulSection.children[i].children[0].children[1].style.display = 'none'
+	 	ulSection.children[i].children[0].children[2].style.display = 'none'
+	 	ulSection.children[i].children[0].children[3].style.display = 'none'
+
+
+	 	ulSection.children[i].children[1].children[0].style.display = 'inline'
+	 	ulSection.children[i].children[1].children[1].style.display = 'inline'
+
+	    }
+
+	}
+})
+
 

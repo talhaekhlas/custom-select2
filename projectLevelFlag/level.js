@@ -48,7 +48,6 @@ function targetInputDownFL(e){
 
 	if(actualPositionFL<0)actualPositionFL = 0;
 
-	console.log(actualPositionFL)
 
 	
 }
@@ -105,7 +104,7 @@ function targetInputUpFL(e){
 	var howMuchTop = 0;
 
 	for(var x = 0; x<=e.currentTarget.inputNo;x++){
-		console.log(ulSection.children[x])
+		
 		howMuchTop += ulSection.children[x].clientHeight+2
 	}
 
@@ -212,9 +211,6 @@ function targetInputUpFL(e){
 }
 
 
-document.addEventListener('click',function(){
-	levelList.style.display = 'none'
-})
 
 
 levelList.addEventListener('click',function(e){
@@ -308,3 +304,8 @@ function crossLSectionDeleteFL(e){
 	
 
 }
+
+
+document.addEventListener('click',function(){
+	levelList.style.display = 'none'
+})

@@ -16,6 +16,7 @@ for(var i=0; i<taskNameMain.length;i++){
 
 function myFunc(e){
 
+			
 			actualPositionFP = 0;
 			enterKeyPressFP = 0;
 
@@ -35,6 +36,7 @@ function myFunc(e){
 
 				if(j==e.currentTarget.listItemNo){
 					
+					ulSection.children[j].style.background='white'
 					dynamicInputField.style.display = 'inline'
 
 					dynamicProject.style.display = 'inline'
@@ -50,7 +52,7 @@ function myFunc(e){
 					dynamicInputField.children[0].focus()
 
 				}else{
-					
+					ulSection.children[j].style.background='#F2F3F4'
 					dynamicInputField.style.display = 'none'
 
 					dynamicProject.style.display = 'none'

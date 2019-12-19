@@ -25,7 +25,7 @@
 
 		.task_name_main{
 			list-style: none;
-		    /*background: #EFF4F6;*/
+		    background: #F2F3F4;
 		    margin: 2px;
 		    min-height: 30px;
 		    padding: 5px;
@@ -85,6 +85,10 @@
 		}
 
 
+
+		
+
+
 		#project_list{
 		    width: 100%;
 		    position: absolute;
@@ -132,15 +136,42 @@
 		}
 
 		.project_item_for_show{
-			background: purple;
+			/*background: purple;*/
 			margin-left: 2px;
 			font-style: italic;
+			color: green;
+			font-size: 13px;
 		}
 
+		.project_item_for_show:after
+		{
+		  content: ',';
+		  color: black;
+		}
+		.project_item_for_show:last-child:after
+		{
+		  content: '';
+		}
+
+
+
 		.level_item_for_show{
-			background: #FFEF33;
+			/*background: #FFEF33;*/
 			margin-left: 2px;
 			font-style: italic;
+			font-size: 13px;
+			color: red;
+		}
+
+
+		.level_item_for_show:after
+		{
+		  content: ',';
+		  color:black;
+		}
+		.level_item_for_show:last-child:after
+		{
+		  content: '';
 		}
 
 /*for level start*/
