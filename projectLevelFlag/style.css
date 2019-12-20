@@ -98,13 +98,16 @@
 
 		.project_list_item{
 			list-style: none;
-		    background: black;
+		    background: #5D6D7E;
+		    color:white;
+		    font-style: bold;
+
 		    
 		    height: 30px;
 		    padding: 5px;
 		    border-bottom: 2px solid white; 
 		    cursor: pointer;
-		    color:white;
+		    
 		}
 
 		.project_list_item:hover{
@@ -185,11 +188,11 @@
 
 		.level_list_item{
 			list-style: none;
-		    background: #3354FF;
+		    background: #85929E;
 		    
 		    height: 30px;
 		    padding: 5px;
 		    border-bottom: 2px solid white; 
 		    cursor: pointer;
-		    color:white;
+		    color:black;
 		}
